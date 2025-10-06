@@ -30,7 +30,12 @@ let activePolls = {};         // all polls (only one at a time)
 let activePollTeachers = {};  // teacher socket -> pollId
 let activePollStudents = {};  // student socket -> pollId
 let activePollId = 'povmsifvf-vgfgb-fbgdf-fdg';        // current active pollId
-
+activePolls[activePollId] = {
+      students: {},
+      questions: [],
+      currentQuestionIndex: -1,
+      lastQuestionActive: false
+    };
 // ----------------------
 // Socket.IO Logic
 // ----------------------
