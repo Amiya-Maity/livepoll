@@ -210,7 +210,7 @@ io.on('connection', (socket) => {
         poll.timerInterval = null;
       }
 
-      let correctOptionIndex = options.findIndex(opt => opt.isCorrect);
+      let correctOptionIndex = question.options.findIndex(opt => opt.isCorrect);
         console.log(correctOptionIndex);
       io.to(pollId).emit("question-ended-voted", {option:correctOptionIndex});
     }
