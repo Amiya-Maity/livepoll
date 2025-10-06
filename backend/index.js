@@ -120,7 +120,8 @@ io.on('connection', (socket) => {
       }
         
       let correctOptionIndex = options.findIndex(opt => opt.isCorrect);
-      io.to(pollId).emit("question-ended-time", correctOptionIndex);
+        console.log(correctOptionIndex);
+      io.to(pollId).emit("question-ended-time", {option:correctOptionIndex});
       console.log("⏰ Question ended by time");
     }, timer * 1000);
 
@@ -210,6 +211,7 @@ io.on('connection', (socket) => {
       }
 
       let correctOptionIndex = options.findIndex(opt => opt.isCorrect);
+        console.log(correctOptionIndex);
       io.to(pollId).emit("question-ended-voted", {option:correctOptionIndex});
     }
   });
