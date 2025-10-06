@@ -1,18 +1,22 @@
 const express = require('express');
-const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 const fs = require('fs');
 const { randomUUID } = require('crypto');
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*" ,// React frontend
-    methods: ["GET", "POST"]
-  }
+
+const PORT = process.env.PORT || 3000;
+
+const server = app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
+
+const io = require("socket.io")(server, {
+    cors: {
+        origin: 'https://livepoll-547w.vercel.app/' ,
+    }
+})
 
 app.use(express.json());
 app.use(cors());
@@ -294,8 +298,3 @@ io.on('connection', (socket) => {
   });
 });
 
-// ----------------------
-// Server Start
-// ----------------------
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
