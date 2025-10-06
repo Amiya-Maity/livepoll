@@ -282,6 +282,8 @@ io.on('connection', (socket) => {
         voted: opt.voted || 0,
         percentage: totalVotes > 0 ? ((opt.voted / totalVotes) * 100).toFixed(2) : 0
       }));
+        let correctOptionIndex = q.options.findIndex(opt => opt.isCorrect);
+        q.correct = correctOptionIndex;
     });
     socket.emit('history', questions || []);
     console.log(questions)
