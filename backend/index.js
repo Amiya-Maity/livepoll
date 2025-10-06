@@ -14,7 +14,9 @@ const server = app.listen(port, () => {
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: '*' ,
+        origin: "http://livepoll.umeshkumar.xyz",
+    methods: ["GET", "POST"],
+    credentials: true
     }
 })
 
