@@ -15,8 +15,8 @@ const server = app.listen(port, () => {
 const io = require("socket.io")(server, {
     cors: {
         origin: "http://livepoll.umeshkumar.xyz",
-    methods: ["GET", "POST"],
-    credentials: true
+        methods: ["GET", "POST"],
+        credentials: true
     }
 })
 
@@ -29,7 +29,7 @@ app.use(cors());
 let activePolls = {};         // all polls (only one at a time)
 let activePollTeachers = {};  // teacher socket -> pollId
 let activePollStudents = {};  // student socket -> pollId
-let activePollId = '';        // current active pollId
+let activePollId = 'povmsifvf-vgfgb-fbgdf-fdg';        // current active pollId
 
 // ----------------------
 // Socket.IO Logic
@@ -43,12 +43,12 @@ io.on('connection', (socket) => {
   // ========================
   socket.on('create-poll', () => {
     // If there’s an existing poll, close it first
-    if (activePollId && activePolls[activePollId]) {
-      console.log(`Closing previous poll ${activePollId}`);
-      delete activePolls[activePollId];
-    }
+    // if (activePollId && activePolls[activePollId]) {
+    //   // console.log(`Closing previous poll ${activePollId}`);
+    //   delete activePolls[activePollId];
+    // }
 
-    const pollId = randomUUID();
+    // const pollId = randomUUID();
 
     activePolls[pollId] = {
       students: {},
@@ -62,6 +62,7 @@ io.on('connection', (socket) => {
 
     socket.join(pollId);
     socket.emit('joined', { pollId });
+    
 
     console.log(`Teacher created poll ${pollId}`);
   });
