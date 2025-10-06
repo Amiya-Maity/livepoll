@@ -210,7 +210,7 @@ io.on('connection', (socket) => {
       }
 
       let correctOptionIndex = options.findIndex(opt => opt.isCorrect);
-      io.to(pollId).emit("question-ended-voted", correctOptionIndex);
+      io.to(pollId).emit("question-ended-voted", {option:correctOptionIndex});
     }
   });
 
