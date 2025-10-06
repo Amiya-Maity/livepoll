@@ -118,8 +118,9 @@ io.on('connection', (socket) => {
         clearInterval(poll.timerInterval);
         poll.timerInterval = null;
       }
-
-      io.to(pollId).emit("question-ended-time", poll.questions[currentIndex]);
+        
+      let correctOptionIndex = options.findIndex(opt => opt.isCorrect);
+      io.to(pollId).emit("question-ended-time", correctOptionIndex);
       console.log("⏰ Question ended by time");
     }, timer * 1000);
 
@@ -208,7 +209,8 @@ io.on('connection', (socket) => {
         poll.timerInterval = null;
       }
 
-      io.to(pollId).emit("question-ended-voted", poll.questions[poll.currentQuestionIndex]);
+      let correctOptionIndex = options.findIndex(opt => opt.isCorrect);
+      io.to(pollId).emit("question-ended-voted", correctOptionIndex);
     }
   });
 
