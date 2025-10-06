@@ -48,10 +48,10 @@ io.on('connection', (socket) => {
     //   delete activePolls[activePollId];
     // }
 
-    // const pollId = randomUUID();
-
+    const pollId = activePollId;
+    const studentsPast = activePolls[pollId].students;
     activePolls[pollId] = {
-      students: {},
+      students: studentsPast,
       questions: [],
       currentQuestionIndex: -1,
       lastQuestionActive: false
@@ -62,8 +62,6 @@ io.on('connection', (socket) => {
 
     socket.join(pollId);
     socket.emit('joined', { pollId });
-    
-
     console.log(`Teacher created poll ${pollId}`);
   });
 
